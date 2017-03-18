@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private BookAdapter mAdapter;
     private ConnectivityManager manager;
-    final String BOOKS_URL = "https://www.googleapis.com/books/v1/volumes?q=" ;
+    final String BOOKS_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +30,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        Button b1= (Button) findViewById(R.id.search_button);
+        Button b1 = (Button) findViewById(R.id.search_button);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextView view = (TextView) findViewById(R.id.emptyList);
-                if(manager.getActiveNetworkInfo() == null ){
+                if (manager.getActiveNetworkInfo() == null) {
                     view.setText("No internet Connection");
                     view.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     view.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_LONG).show();
                     EditText edit = (EditText) findViewById(R.id.editText);
@@ -73,13 +72,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Book> data) {
             mAdapter.clear();
-            if (data != null && !data.isEmpty()) {
-                mAdapter.addAll(data);
-            }
-            if(data == null){
+            if (data.size() == 0) {
                 TextView view = (TextView) findViewById(R.id.emptyList);
                 view.setText("No results found");
+                view.setVisibility(View.VISIBLE);
+                return;
             }
+            mAdapter.addAll(data);
+
+
         }
 
     }

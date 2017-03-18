@@ -59,7 +59,7 @@ public class QueryUtils {
             JSONObject baseJsonResponse = new JSONObject(bookJSON);
             JSONArray items = baseJsonResponse.optJSONArray("items");
             if(items == null){
-                return  null;
+                return  books;
             }
             for (int i = 0; i < items.length(); i++) {
 
