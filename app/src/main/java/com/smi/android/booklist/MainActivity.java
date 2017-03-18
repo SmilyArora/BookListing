@@ -15,6 +15,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.data;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -73,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
             mAdapter.clear();
             if (data != null && !data.isEmpty()) {
                 mAdapter.addAll(data);
+            }
+            if(data == null){
+                TextView view = (TextView) findViewById(R.id.emptyList);
+                view.setText("No results found");
             }
         }
 

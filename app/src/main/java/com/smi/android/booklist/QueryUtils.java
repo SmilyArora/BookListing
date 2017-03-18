@@ -2,6 +2,8 @@ package com.smi.android.booklist;
 
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +19,8 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Created by Smily on 3/17/2017.
@@ -54,6 +58,9 @@ public class QueryUtils {
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(bookJSON);
             JSONArray items = baseJsonResponse.optJSONArray("items");
+            if(items == null){
+                return  null;
+            }
             for (int i = 0; i < items.length(); i++) {
 
                 // Get a single book at position i within the list of books
