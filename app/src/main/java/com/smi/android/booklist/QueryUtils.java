@@ -53,16 +53,20 @@ public class QueryUtils {
 
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(bookJSON);
-            JSONArray items = baseJsonResponse.getJSONArray("items");
+            JSONArray items = baseJsonResponse.optJSONArray("items");
             for (int i = 0; i < items.length(); i++) {
 
                 // Get a single book at position i within the list of books
                 JSONObject currentItem = items.getJSONObject(i);
                 JSONObject volInfo= currentItem.getJSONObject("volumeInfo");
 
-                double rating = volInfo.getDouble("averageRating");
+                double rating = 0.0;
+                if(volInfo.has("averageRating")){
+                     rating = volInfo.optDouble("averageRating");
+                }
+
                 String title = volInfo.getString("title");
-                JSONArray authors = volInfo.getJSONArray("authors");
+                JSONArray authors = volInfo.optJSONArray("authors");
                 String author = "";
                 if(authors ==null){
                     author =" ";

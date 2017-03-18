@@ -19,26 +19,26 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private BookAdapter mAdapter;
-  //  private ConnectivityManager manager;
+    private ConnectivityManager manager;
     final String BOOKS_URL = "https://www.googleapis.com/books/v1/volumes?q=" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-      //  manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         Button b1= (Button) findViewById(R.id.search_button);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextView view = (TextView) findViewById(R.id.emptyList);
-             /*   if(manager.getActiveNetworkInfo() == null ){
+                if(manager.getActiveNetworkInfo() == null ){
                     view.setText("No internet Connection");
                     view.setVisibility(View.VISIBLE);
                 }
                 else {
-                    view.setVisibility(View.GONE);*/
+                    view.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_LONG).show();
                     EditText edit = (EditText) findViewById(R.id.editText);
                     //sewing url from sub strings
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     task.execute(url);
                 }
 
-           // }
+            }
         });
 
         ListView view = (ListView) findViewById(R.id.list);
